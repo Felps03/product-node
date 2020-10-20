@@ -1,0 +1,35 @@
+{
+    "serviceName": "product-node",
+    "db": {
+        "username": "admin",
+        "password": "admin",
+        "database": "product-node",
+        "servers": [
+            "127.0.0.1:27017"
+        ],
+        "dialect": "mongodb",
+        "logging": "",
+        "options": {
+            "authSource": "admin",
+            "replicaSet": ""
+        }
+    },
+    "web": {
+        "port": 4000
+    },
+    "integration": {
+        "rest": {
+            "testIntegrationMs": {
+                "baseUrl": "http://localhost:9000/",
+                "timeout": 10000,
+                "rejectUnauthorized": false
+            }
+        }
+    },
+    "hateoas": {
+        "domain": "https://localhost:3005/"
+    },
+    "stackError": {
+        "isVisible": true
+    }
+}

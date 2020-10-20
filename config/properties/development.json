@@ -1,0 +1,30 @@
+{
+    "serviceName": "product-node",
+    "db": {
+        "username": "admin",
+        "password": "admin",
+        "database": "product-node",
+        "servers": [
+            "127.0.0.1:27017"
+        ],
+        "dialect": "mongodb",
+        "logging": "",
+        "options": {
+            "authSource": "admin",
+            "replicaSet": ""
+        }
+    },
+    "web": {
+        "port": 4000
+    },
+    "integration": {
+        "rest": {
+        }
+    },
+    "hateoas": {
+        "domain": "https://localhost:4000/"
+    },
+    "stackError": {
+        "isVisible": true
+    }
+}

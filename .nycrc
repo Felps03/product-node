@@ -1,0 +1,18 @@
+{
+    "cwd": "./src",
+    "exclude": [
+        "container.js",
+        "app/Application.js",
+        "interfaces/http/Server.js",
+        "interfaces/http/Router.js",
+        "interfaces/http/errors/HttpErrors.js"
+    ],
+    "reporter": [
+        "cobertura",
+        "html",
+        "lcov",
+        "text-summary"
+    ],
+    "check-coverage": true,
+    "lines": 100
+}
