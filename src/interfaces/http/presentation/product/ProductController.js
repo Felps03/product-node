@@ -2,22 +2,28 @@ const AsyncMiddleware = require('src/interfaces/http/presentation/middlewares/As
 
 module.exports = opts => ({
     createProduct: AsyncMiddleware(async ctx => {
-        //const response = await opts.createProductOperation.execute(ctx.body);
-        return ctx.res.status(opts.httpConstants.code.CREATED).json(ctx.body);
 
+        const product = await opts.createProductOperation.execute(ctx.body);
+        const productReady = opts.productSerializer.create(product);
+
+        return ctx.res.status(opts.httpConstants.code.CREATED).json(productReady);
     }),
 
     getProduct: AsyncMiddleware(async ctx => {
-        //const response = await opts.createProductOperation.execute(ctx.body);
-        console.log('getProduct')
-        return ctx.res.status(opts.httpConstants.code.OK).json(ctx.params);
 
+        const product = await opts.createProductOperation.execute(ctx.params);
+        const productReady = opts.productSerializer.get(product);
+
+        return ctx.res.status(opts.httpConstants.code.OK).json(productReady);
     }),
+
     searchProduct: AsyncMiddleware(async ctx => {
-        //const response = await opts.createProductOperation.execute(ctx.body);
-        console.log('searchProduct')
-        return ctx.res.status(opts.httpConstants.code.OK).json(ctx.query);
-        
+
+        const product = await opts.createProductOperation.execute(ctx.query);
+        const productReady = opts.productSerializer.get(product);
+
+        return ctx.res.status(opts.httpConstants.code.OK).json(productReady);
+
     })
 
 });

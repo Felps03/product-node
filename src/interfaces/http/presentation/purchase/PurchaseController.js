@@ -2,8 +2,10 @@ const AsyncMiddleware = require('src/interfaces/http/presentation/middlewares/As
 
 module.exports = opts => ({
     createPurchase: AsyncMiddleware(async ctx => {
-        //const response = await opts.createProductOperation.execute(ctx.body);
-        return ctx.res.status(opts.httpConstants.code.OK).json(ctx.body);
 
+        const purchase = await opts.createPurchaseOperation.execute(ctx.body);
+        const purchaseReady = opts.purchaseSerializer.create(purchase);
+
+        return ctx.res.status(opts.httpConstants.code.OK).json(purchaseReady);
     })
 });
