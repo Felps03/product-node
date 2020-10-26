@@ -31,7 +31,7 @@ describe('App :: Operations :: Product :: CreateProductOperation', () => {
                     name: 'SomeProduct',
                     valueUnitary: 999,
                     amount: 99,
-                }
+                };
 
 
                 productRepository = {

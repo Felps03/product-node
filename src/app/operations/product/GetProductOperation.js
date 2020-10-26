@@ -14,7 +14,7 @@ class GetProductOperation {
 
         } catch (error) {
             this.logger.error(error);
-            throw error
+            throw error;
         }
     }
 }

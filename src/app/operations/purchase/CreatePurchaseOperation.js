@@ -18,19 +18,19 @@ class CreatePurchaseOperation {
 
         try {
 
-            const productFromDatabase = await this.productRepository.get({ id: product })
+            const productFromDatabase = await this.productRepository.get({ id: product });
             const purchaseApproved = this.purchaseValidator.validate(purchaseData, productFromDatabase);
 
             if (!purchaseApproved) {
                 return new Error('Purchase not approved');
             }
 
-            await this.productRepository.update(purchaseApproved)
+            await this.productRepository.update(purchaseApproved);
             return await this.purchaseRespository.create(purchaseApproved);
 
         } catch (error) {
             this.logger.error(error);
-            return error
+            return error;
         }
     }
 }

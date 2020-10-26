@@ -109,15 +109,15 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
 
             });
 
-            it(' returns error ', async () => {
+            it(' returns error ', done => {
 
                 purchaseController
                     .createPurchase(ctx)
-                    .then(() => document('Must be an error'))
+                    .then(() => done('Must be an error'))
                     .catch((error => {
                         expect(opts.createPurchaseOperation.execute).to.have.been.called.once();
                         expect(error).to.be.exist();
-                        expect();
+                        done();
                     }));
             });
         });

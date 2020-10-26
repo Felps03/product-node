@@ -22,10 +22,10 @@ describe('Infra :: Database :: Repository :: ProductRepository', () => {
             };
 
             productRequested = {
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                };
+                name: 'SomeProduct',
+                valueUnitary: 999,
+                amount: 99,
+            };
             spy.on(productModel, 'create');
             productRepository = new ProductRepository({productModel});      
         });
@@ -56,8 +56,8 @@ describe('Infra :: Database :: Repository :: ProductRepository', () => {
             };
 
             productRequested = {
-                    id: 9
-                };
+                id: 9
+            };
             spy.on(productModel, 'find');
             productRepository = new ProductRepository({productModel});      
         });
@@ -88,11 +88,11 @@ describe('Infra :: Database :: Repository :: ProductRepository', () => {
             };
 
             productRequested = {
-                    min_price: 200,
-                    max_price: 600
-                };
+                min_price: 200,
+                max_price: 600
+            };
 
-            query = { valueUnitary: { $gte: productRequested.min_price, $lte: productRequested.max_price } } 
+            query = { valueUnitary: { $gte: productRequested.min_price, $lte: productRequested.max_price } }; 
 
             spy.on(productModel, 'find');
             productRepository = new ProductRepository({productModel});      

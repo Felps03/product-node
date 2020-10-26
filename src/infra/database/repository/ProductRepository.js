@@ -1,4 +1,4 @@
-const { PRICES } = require('src/domain/services/products/ProductsConstants')()
+const { PRICES } = require('src/domain/services/products/ProductsConstants')();
 
 class ProductRepository {
     constructor({ productModel }) {

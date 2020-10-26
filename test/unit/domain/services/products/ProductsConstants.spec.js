@@ -7,11 +7,11 @@ describe('Domain :: Services :: Products :: ProductsConstants', () => {
     context('When ProductsConstants is requested', ()=>{
     
         beforeEach(() =>{
-             data = {
+            data = {
                 PRICES: {
                     MAX_PRICE: 9999999999
                 }
-            }
+            };
             productsConstants = ProductsConstants();      
         });
 

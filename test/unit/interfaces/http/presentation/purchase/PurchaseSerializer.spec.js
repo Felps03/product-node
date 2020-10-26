@@ -1,4 +1,4 @@
-const { expect, spy } = require('chai');
+const { expect } = require('chai');
 const PurchaseSerializer = require('src/interfaces/http/presentation/purchase/PurchaseSerializer');
 
 describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseSerializer', () => {

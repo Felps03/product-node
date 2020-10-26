@@ -19,7 +19,7 @@ describe('Infra :: Database :: Repository :: PurchaseRepository', () => {
                     value: 500,
                     monthlyInterestRate: null
                 }]
-            }
+            };
 
             purchaseModel = {
                 create: () => Promise.resolve(purchaseFromDatabase)

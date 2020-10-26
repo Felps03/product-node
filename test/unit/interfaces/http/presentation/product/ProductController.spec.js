@@ -248,15 +248,15 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
 
             });
 
-            it(' returns products data ', async () => {
+            it(' returns products data ', done => {
 
                 productController
                     .searchProduct(ctx)
-                    .then(() => document('Must be an error'))
+                    .then(() => done('Must be an error'))
                     .catch((error => {
                         expect(opts.searchProductOperation.execute).to.have.been.called.once();
                         expect(error).to.be.exist();
-                        expect();
+                        done();
                     }));
             });
         });

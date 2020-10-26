@@ -7,7 +7,7 @@ describe('Domain :: Services :: Purchase :: PurchaseConstants', () => {
     context('When PurchaseConstants is requested', ()=>{
     
         beforeEach(() =>{
-             data = {
+            data = {
                 TAXES: {
                     SELIC: {
                         START_INSTALLMENTS: 6,
@@ -15,7 +15,7 @@ describe('Domain :: Services :: Purchase :: PurchaseConstants', () => {
                         PERCENT: '2.5%'
                     }
                 }
-            }
+            };
             purchaseConstants = PurchaseConstants();      
         });
 

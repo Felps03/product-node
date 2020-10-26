@@ -24,7 +24,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                         inputValue: 500,
                         numberOfInstallments: 1
                     }
-                }
+                };
 
                 productFromDatabase = {
                     id: 9,
@@ -44,7 +44,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                     lastPriceSold: 500,
                     lastTimeSold: '2020-10-26T14:56:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
                 purchaseApproved = {
                     productId: 9,
@@ -57,7 +57,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                         value: 500,
                     }],
                     totalPrice: 500
-                }
+                };
 
                 purchaseFromDatabase = {
                     id: 1,
@@ -128,7 +128,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                         inputValue: 240,
                         numberOfInstallments: 6
                     }
-                }
+                };
 
                 productFromDatabase = {
                     id: 10,
@@ -148,7 +148,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                     lastPriceSold: 240,
                     lastTimeSold: '2020-10-26T14:56:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
                 purchaseApproved = {
                     productId: 9,
@@ -187,7 +187,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                         monthlyInterestRate: '2.5%'
                     }],
                     totalPrice: 276
-                }
+                };
 
                 purchaseFromDatabase = {
                     id: 1,
@@ -266,7 +266,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
 
         context('when occurs error', () => {
 
-            let createPurchaseOperation, logger;
+            let createPurchaseOperation, purchaseRepository, logger;
 
             before(() => {
                 purchaseRepository = {
