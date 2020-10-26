@@ -10,5 +10,5 @@ module.exports = ({ container }) => {
             },
             handler: ctx.purchaseController.createPurchase
         }
-    ]
+    ];
 };
