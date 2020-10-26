@@ -3,10 +3,10 @@ const joi = require('@hapi/joi')
 
 module.exports = () => ({
     create: joi.object().keys({
-        product: joi.string().required(),
+        product: joi.number().required(),
         paymentCondition:{
-            inputValue: joi.string().required(),
-            numberOfInstallments: joi.string().required()
+            inputValue: joi.number().required(),
+            numberOfInstallments: joi.number().required()
         }   
     })
 });
