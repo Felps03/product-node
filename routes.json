@@ -1,0 +1,183 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2020-10-26T19:56:58.178Z",
+    "__export_source": "insomnia.desktop.app:v2020.4.1",
+    "resources": [
+        {
+            "_id": "req_48d72ff9658b49a38e2a6ff0ceb6a62a",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603733568602,
+            "created": 1603307757010,
+            "url": "http://localhost:4000/api/products",
+            "name": "Post Product",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n \"product\": {\n \"name\": \"Gabinete MAXPRO30\",\n \"valueUnitary\": 459,\n \"amount\": 8\n }\n}\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_b49f31634d734d2c854884b66d318baa"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1603307757011,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "parentId": null,
+            "modified": 1603307715259,
+            "created": 1603307715259,
+            "name": "Microsserviço - Products",
+            "description": "",
+            "scope": null,
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_390948d42d094642a053e7d48aaaf09b",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603713493781,
+            "created": 1603310376045,
+            "url": "http://localhost:4000/api/products/search",
+            "name": "Get Product - Range",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1602656551802,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b892c56f23cb435aa402369ad7f893e1",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603719604321,
+            "created": 1603311806367,
+            "url": "http://localhost:4000/api/products/9",
+            "name": "Get Product - ID",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1602330949197.5,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_98a7b9584e664752a70678a35d36ee73",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603313696313,
+            "created": 1603313061295,
+            "url": "http://localhost:4000/api/products",
+            "name": "Get Products  ",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1602168147895.25,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_0111c59b78764a848e667ca88c457e76",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603742088548,
+            "created": 1603314968808,
+            "url": "http://localhost:4000/api/purchase",
+            "name": "Post Purchase  ",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n \"product\": 1,\n \"paymentCondition\": {\n \"inputValue\": 60,\n \"numberOfInstallments\": 1\n }\n}\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_c3932393ef69430b91cc09d3d5e24cb0"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1602086747244.125,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_a22aa94ba26fb48520d2bbdae2b1e5e36efde8a0",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603307715322,
+            "created": 1603307715322,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1603307715322,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_a22aa94ba26fb48520d2bbdae2b1e5e36efde8a0",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603307715325,
+            "created": 1603307715325,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_e46641146928405ba4f4ac96549f589d",
+            "parentId": "wrk_de6b8e6a6f6d42c4a414edf7188cd881",
+            "modified": 1603307715263,
+            "created": 1603307715263,
+            "fileName": "Microsserviço - Products",
+            "contents": "",
+            "contentType": "yaml",
+            "_type": "api_spec"
+        }
+    ]
+}
