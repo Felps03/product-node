@@ -6,40 +6,49 @@ describe('App :: Operations :: Product :: CreateProductOperation', () => {
     describe('#execute', () => {
         context('when product was created with success', () => {
 
-            let createProductOperation, productRepository, productFromDatabase, productToBeCreated, logger;
+            let createProductOperation, productRepository, productFromDatabase, productToBeCreated, product, logger;
 
             before(() => {
                 productFromDatabase = {
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
                 productToBeCreated = {
+                    product: {
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                    }
+                };
+
+                product = {
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                 }
+
+
                 productRepository = {
                     create: () => Promise.resolve(productFromDatabase)
                 };
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
                 createProductOperation = new CreateProductOperation({ productRepository, logger });
                 spy.on(productRepository, 'create');
             });
 
             it('returns created product', async () => {
                 const response = await createProductOperation.execute(productToBeCreated);
-
                 expect(response).to.be.deep.equal(productFromDatabase);
-                expect(productRepository.create).to.be.called.once.with.exactly(productToBeCreated);
+                expect(productRepository.create).to.be.called.once.with.exactly(product);
             });
         });
 
@@ -54,7 +63,7 @@ describe('App :: Operations :: Product :: CreateProductOperation', () => {
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
 
                 createProductOperation = new CreateProductOperation({ productRepository, logger });
                 spy.on(productRepository, 'create');

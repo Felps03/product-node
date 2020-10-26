@@ -10,18 +10,18 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
             before(() => {
                 productFromDatabase = [{
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }]
+                }];
 
                 productRequestedId = {
                     id: 9
-                }
+                };
 
                 productRepository = {
                     get: () => Promise.resolve(productFromDatabase)
@@ -29,7 +29,7 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
 
                 getProductOperation = new GetProductOperation({ productRepository, logger });
 
@@ -50,27 +50,27 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
             before(() => {
                 productFromDatabase = [{
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
                 },
                 {
                     id: '10',
                     name: 'AnotherProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }]
+                }];
 
                 productRequestedId = {
                     id: ''
-                }
+                };
 
                 productRepository = {
                     get: () => Promise.resolve(productFromDatabase)
@@ -78,7 +78,7 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
 
                 getProductOperation = new GetProductOperation({ productRepository, logger });
 
@@ -104,7 +104,7 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
 
                 getProductOperation = new GetProductOperation({ productRepository, logger });
                 spy.on(productRepository, 'get');

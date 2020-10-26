@@ -7,29 +7,30 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
 
         context('when a purchase request is successful', () => {
 
-            let purchaseController,
-                ctx,
-                opts,
+            let purchaseController, ctx, opts, purchaseSerialized, purchaseFromDatabase;
+
+            before(() => {
+
                 purchaseSerialized = [{
-                    numberOfInstallments: "1",
-                    value: "9999.99"
-                }],
+                    numberOfInstallments: 1,
+                    value: 9999.99
+                }];
+
                 purchaseFromDatabase = {
-                    id: '98',
-                    productId: '9',
+                    id: 98,
+                    productId: 9,
                     paymentCondition: {
-                        inputValue: "9999.99",
-                        numberOfInstallments: "1"
+                        inputValue: 9999.99,
+                        numberOfInstallments: 1
                     },
                     installments: [{
-                        numberOfInstallments: "1",
-                        value: "9999.99",
+                        numberOfInstallment: 1,
+                        value: 9999.99,
                         monthlyInterestRate: null
                     }],
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
-            before(() => {
                 opts = {
                     createPurchaseOperation: {
                         execute: () => Promise.resolve(purchaseFromDatabase)
@@ -46,10 +47,10 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
 
                 ctx = {
                     body: {
-                        product: "9",
+                        product: 9,
                         paymentCondition: {
-                            inputValue: "9999.99",
-                            numberOfInstallments: "1"
+                            inputValue: 9999.99,
+                            numberOfInstallments: 1
                         }
                     },
                     res: {
@@ -78,7 +79,7 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
         });
         context('when occurs error', () => {
 
-            let purchaseController, ctx, opts
+            let purchaseController, ctx, opts;
 
             before(() => {
                 opts = {
@@ -89,10 +90,10 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
 
                 ctx = {
                     body: {
-                        product: "9",
+                        product: 9,
                         paymentCondition: {
-                            inputValue: "9999.99",
-                            numberOfInstallments: "1"
+                            inputValue: 9999.99,
+                            numberOfInstallments: 1
                         }
                     },
                     res: {
@@ -116,8 +117,8 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
                     .catch((error => {
                         expect(opts.createPurchaseOperation.execute).to.have.been.called.once();
                         expect(error).to.be.exist();
-                        expect()
-                    }))
+                        expect();
+                    }));
             });
         });
     });

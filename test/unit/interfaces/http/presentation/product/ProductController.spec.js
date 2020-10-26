@@ -10,18 +10,19 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 ctx,
                 opts,
                 productSerialized = {
+                    id: 9,
                     name: 'SomeProduct',
-                    product: 'created'
+                    status: 'created'
                 },
                 productFromDatabase = {
-                    id: '9',
-                    name: 'ProductTest',
-                    valueUnitary: '999',
-                    amount: '99',
+                    id: 9,
+                    name: 'SomeProduct',
+                    valueUnitary: 999,
+                    amount: 99,
                     lastPriceSold: null,
                     lastTimeSold: null,
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
             before(() => {
                 opts = {
@@ -41,8 +42,8 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 ctx = {
                     body: {
                         name: 'SomeProduct',
-                        valueUnitary: '999',
-                        amount: '99'
+                        valueUnitary: 999,
+                        amount: 99
                     },
                     res: {
                         status: () => ({
@@ -79,20 +80,20 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 opts,
                 productSerialized = {
                     name: 'ProductTest',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lasTimeSold: '2020-10-13T11:55:15.522Z'
                 },
                 productFromDatabase = {
-                    id: '9',
+                    id: 9,
                     name: 'ProductTest',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                     lastPriceSold: null,
                     lastTimeSold: null,
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
             before(() => {
                 opts = {
@@ -100,7 +101,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                         execute: () => Promise.resolve(productFromDatabase)
                     },
                     productSerializer: {
-                        get: () => (productSerialized)
+                        getOne: () => (productSerialized)
                     },
                     httpConstants: {
                         code: ({
@@ -111,7 +112,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
 
                 ctx = {
                     params: {
-                        id: '9'
+                        id: 9
                     },
                     res: {
                         status: () => ({
@@ -123,7 +124,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 productController = ProductController(opts);
 
                 spy.on(opts.getProductOperation, 'execute');
-                spy.on(opts.productSerializer, 'get');
+                spy.on(opts.productSerializer, 'getOne');
                 spy.on(ctx.res, 'status');
             });
 
@@ -131,7 +132,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
 
                 const response = await productController.getProduct(ctx);
                 expect(opts.getProductOperation.execute).to.have.been.called.once.with.exactly(ctx.params);
-                expect(opts.productSerializer.get).to.have.been.called.once.with.exactly(productFromDatabase);
+                expect(opts.productSerializer.getOne).to.have.been.called.once.with.exactly(productFromDatabase);
                 expect(ctx.res.status).to.have.been.called.once();
                 expect(response).to.deep.equal(productSerialized);
 
@@ -148,19 +149,19 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 opts,
                 productSerialized = [{
                     name: 'ProductTest',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                 },
                 {
                     name: 'AnotherProductTest',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                 }],
                 productFromDatabase = [{
-                    id: '9',
+                    id: 9,
                     name: 'ProductTest',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                     lastPriceSold: null,
                     lastTimeSold: null,
                     created_at: '2020-10-13T11:55:15.522Z',
@@ -172,7 +173,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                     lastPriceSold: null,
                     lastTimeSold: null,
                     created_at: '2020-10-14T11:56:15.522Z',
-                }]
+                }];
 
             before(() => {
                 opts = {
@@ -192,7 +193,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 ctx = {
                     query: {
                         min_price: '1',
-                        max_price: '999'
+                        max_price: 999
                     },
                     res: {
                         status: () => ({
@@ -220,7 +221,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
         });
         context('when occurs error', () => {
 
-            let productController, ctx, opts
+            let productController, ctx, opts;
 
             before(() => {
                 opts = {
@@ -232,7 +233,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                 ctx = {
                     query: {
                         min_price: '1',
-                        max_price: '999'
+                        max_price: 999
                     },
                     res: {
                         status: () => ({
@@ -255,8 +256,8 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                     .catch((error => {
                         expect(opts.searchProductOperation.execute).to.have.been.called.once();
                         expect(error).to.be.exist();
-                        expect()
-                    }))
+                        expect();
+                    }));
             });
         });
     });

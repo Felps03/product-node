@@ -9,45 +9,45 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductRouter', () =>
 
             arrayWithRoutes = [
                 {
-                  method: 'post',
-                  path: '/',
-                  validation: { body: null },
-                  handler: null
+                    method: 'post',
+                    path: '/',
+                    validation: { body: null },
+                    handler: null
                 },
                 {
-                  method: 'get',
-                  path: '/search',
-                  validation: { query: null },
-                  handler: null
+                    method: 'get',
+                    path: '/search',
+                    validation: { query: null },
+                    handler: null
                 },
                 {
-                  method: 'get',
-                  path: '/:id',
-                  validation: { params: null },
-                  handler: null
+                    method: 'get',
+                    path: '/:id',
+                    validation: { params: null },
+                    handler: null
                 },
                 {
-                  method: 'get',
-                  path: '/',
-                  validation: { params: null },
-                  handler: null
+                    method: 'get',
+                    path: '/',
+                    validation: { params: null },
+                    handler: null
                 }
-              ]
+            ];
             container = {
                 cradle: {
-                    productSchema:{
+                    productSchema: {
                         query: null,
                         params: null,
                         create: null
                     },
-                    productController:{
+                    productController: {
                         getProduct: null,
                         searchProduct: null,
                         createProduct: null
                     }
                 }
-            }
-            productRouter = ProductRouter({container});
+            };
+            productRouter = ProductRouter({ container });
         });
 
         it('return an array with routes data', async () => {

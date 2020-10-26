@@ -11,19 +11,20 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
             before(() => {
 
                 productSerialized = {
+                    id: 9,
                     name: 'SomeProduct',
                     status: 'created'
-                }
+                };
 
                 productFromDatabase = {
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                     lastPriceSold: null,
                     lastTimeSold: null,
                     created_at: '2020-10-13T11:55:15.522Z',
-                }
+                };
 
                 productSerializer = ProductSerializer();
             });
@@ -44,21 +45,21 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
 
                 productSerialized = [{
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
-                }]
+                }];
 
                 productFromDatabase = [{
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }]
+                }];
 
                 productSerializer = ProductSerializer();
             });
@@ -78,34 +79,36 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
             before(() => {
 
                 productSerialized = [{
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                 },
                 {
+                    id: 10,
                     name: 'AnotherProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                }]
+                    valueUnitary: 999,
+                    amount: 99,
+                }];
 
                 productFromDatabase = [{
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
                 },
                 {
-                    id: '10',
+                    id: 10,
                     name: 'AnotherProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }]
+                }];
 
                 productSerializer = ProductSerializer();
             });
@@ -126,33 +129,33 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
 
                 productSerialized = [{
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
+                    valueUnitary: 999,
+                    amount: 99,
                 },
                 {
                     name: 'AnotherProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                }]
+                    valueUnitary: 999,
+                    amount: 99,
+                }];
 
                 productFromDatabase = [{
-                    id: '9',
+                    id: 9,
                     name: 'SomeProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
                 },
                 {
-                    id: '10',
+                    id: 10,
                     name: 'AnotherProduct',
-                    valueUnitary: '999',
-                    amount: '99',
-                    lastPriceSold: '999',
+                    valueUnitary: 999,
+                    amount: 99,
+                    lastPriceSold: 999,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }]
+                }];
 
                 productSerializer = ProductSerializer();
             });

@@ -9,12 +9,12 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseRouter', () 
 
             arrayWithRoutes = [
                 {
-                  method: 'post',
-                  path: '/',
-                  validation: { body: null },
-                  handler: null
+                    method: 'post',
+                    path: '/',
+                    validation: { body: null },
+                    handler: null
                 }
-              ]
+            ];
             container = {
                 cradle: {
                     purchaseSchema:{
@@ -24,7 +24,7 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseRouter', () 
                         createPurchase: null,
                     }
                 }
-            }
+            };
             purchaseRouter = PurchaseRouter({container});
         });
 

@@ -10,19 +10,19 @@ describe('App :: Operations :: Product :: SearchProductOperation', () => {
 
             before(() => {
                 productFromDatabase = [{
-                    id: '20',
+                    id: 20,
                     name: 'BeautifulProduct',
-                    valueUnitary: '750',
-                    amount: '99',
-                    lastPriceSold: '750',
+                    valueUnitary: 750,
+                    amount: 99,
+                    lastPriceSold: 750,
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                     created_at: '2020-10-13T11:55:15.522Z',
-                }]
+                }];
 
                 productRequestedRange = {
-                    min_price: '600',
-                    max_price: '800'
-                }
+                    min_price: 600,
+                    max_price: 800
+                };
 
                 productRepository = {
                     search: () => Promise.resolve(productFromDatabase)
@@ -30,7 +30,7 @@ describe('App :: Operations :: Product :: SearchProductOperation', () => {
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
 
                 searchProductOperation = new SearchProductOperation({ productRepository, logger });
 
@@ -57,7 +57,7 @@ describe('App :: Operations :: Product :: SearchProductOperation', () => {
 
                 logger = {
                     error: () => ({ erro: 'Error was logged' })
-                }
+                };
 
                 searchProductOperation = new SearchProductOperation({ productRepository, logger });
                 spy.on(productRepository, 'search');
