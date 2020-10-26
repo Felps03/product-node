@@ -1,9 +1,10 @@
 module.exports = () => ({
-    create: ({name}) => {
+    create: ({id, name}) => {
 
-        return { name, status: "created" };
+        return { id, name, status: 'created' };
     },
     getOne: (products) => {
+
 
         return products.map((product) => {
             const { name, valueUnitary, amount, lastPriceSold, lastTimeSold } = product;
@@ -12,9 +13,10 @@ module.exports = () => ({
     },
     getAll: (products) => {
 
+
         return products.map((product) => {
-            const { name, valueUnitary, amount } = product;
-            return { name, valueUnitary, amount };
+            const { id, name, valueUnitary, amount } = product;
+            return { id, name, valueUnitary, amount };
         });
     },
     search: (products) => {

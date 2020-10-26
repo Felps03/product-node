@@ -11,16 +11,19 @@ module.exports = opts => ({
 
     getProduct: AsyncMiddleware(async ctx => {
 
-        const product = await opts.createProductOperation.execute(ctx.params);
-        const productReady = opts.productSerializer.get(product);
+        const product = await opts.getProductOperation.execute(ctx.params);
+
+        const productReady = ctx.params.id ?
+            opts.productSerializer.getOne(product):
+            opts.productSerializer.getAll(product);
 
         return ctx.res.status(opts.httpConstants.code.OK).json(productReady);
     }),
 
     searchProduct: AsyncMiddleware(async ctx => {
 
-        const product = await opts.createProductOperation.execute(ctx.query);
-        const productReady = opts.productSerializer.get(product);
+        const product = await opts.searchProductOperation.execute(ctx.query);
+        const productReady = opts.productSerializer.search(product);
 
         return ctx.res.status(opts.httpConstants.code.OK).json(productReady);
 

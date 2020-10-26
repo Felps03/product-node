@@ -7,10 +7,10 @@ class CreateProductOperation {
         this.logger = logger;
     }
 
-    async execute(productData) {
+    async execute({product}) {
         try {
 
-            return await this.productRepository.create(productData);
+            return await this.productRepository.create(product);
 
         } catch (error) {
             this.logger.error(error);
