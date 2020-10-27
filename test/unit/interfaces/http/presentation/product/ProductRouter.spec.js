@@ -29,7 +29,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductRouter', () =>
                 {
                     method: 'get',
                     path: '/',
-                    validation: { params: null },
+                    validation: {},
                     handler: null
                 }
             ];

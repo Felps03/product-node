@@ -2,10 +2,11 @@ const { TAXES } = require('src/domain/services/purchase/PurchaseConstants')();
 
 module.exports = () => ({
 
-    validate: (purchaseData, productFromDatabase) => {
-        const { paymentCondition } = purchaseData;
+    validate: ({ paymentCondition }, productFromDatabase) => {
+
         const { inputValue, numberOfInstallments } = paymentCondition;
-        const { valueUnitary, amount, id } = productFromDatabase[0];
+        const { valueUnitary, amount, id } = productFromDatabase.shift();
+
         const installmentValue = (valueUnitary / numberOfInstallments);
         const taxValue = (valueUnitary * TAXES.SELIC.VALUE);
 
@@ -16,7 +17,7 @@ module.exports = () => ({
         if (!amount)
             return new Error('Sold out');
 
-        if (inputValue < valueUnitary) 
+        if (inputValue < valueUnitary)
             return new Error('Insufficient funds');
 
 
