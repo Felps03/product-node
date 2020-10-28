@@ -1,4 +1,4 @@
-const { TAXES } = require('src/domain/services/purchase/PurchaseConstants')();
+const { TAXES:{SELIC:{ VALUE, START_INSTALLMENTS, PERCENT}} } = require('src/domain/services/purchase/PurchaseConstants')();
 
 module.exports = () => ({
 
@@ -8,7 +8,7 @@ module.exports = () => ({
         const { valueUnitary, amount, id } = productFromDatabase.shift();
 
         const installmentValue = (valueUnitary / numberOfInstallments);
-        const taxValue = (valueUnitary * TAXES.SELIC.VALUE);
+        const taxValue = (valueUnitary * VALUE);
 
         let totalPrice = 0;
         let installments = [];
@@ -22,12 +22,12 @@ module.exports = () => ({
 
 
         for (let i = 1; i <= numberOfInstallments; i++) {
-            numberOfInstallments >= TAXES.SELIC.START_INSTALLMENTS ?
+            numberOfInstallments >= START_INSTALLMENTS ?
                 installments.push(
                     {
                         numberOfInstallment: i,
                         value: parseFloat((installmentValue + taxValue).toFixed(2)),
-                        monthlyInterestRate: TAXES.SELIC.PERCENT
+                        monthlyInterestRate: PERCENT
                     }) :
                 installments.push(
                     {

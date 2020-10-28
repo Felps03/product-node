@@ -1,5 +1,5 @@
 const { expect, spy } = require('chai');
-const ProductModel = require('test/unit/infra/database/mongo/models/src/infra/database/mongo/models/ProductModel');
+const ProductModel = require('src/infra/database/mongo/models/ProductModel');
 const mongoose = require('mongoose');
 
 describe('Infra :: Database :: Mongo :: Models :: ProductModel', () => {

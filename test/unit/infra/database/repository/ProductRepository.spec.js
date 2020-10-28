@@ -1,5 +1,5 @@
 const {expect, spy} = require('chai');
-const ProductRepository = require('test/unit/infra/database/repository/src/infra/database/repository/ProductRepository');
+const ProductRepository = require('src/infra/database/repository/ProductRepository');
 
 
 describe('Infra :: Database :: Repository :: ProductRepository', () => {
