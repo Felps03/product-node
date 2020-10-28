@@ -1,4 +1,11 @@
 const mongoose = require('mongoose');
+const connectionOptions = {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    readPreference: 'nearest'
+};
 
 class ProviderConnection {
     constructor({ config, logger }) {
@@ -9,29 +16,30 @@ class ProviderConnection {
         this.mongoose = mongoose;
     }
 
-    _getMongoURL(config) {
-        const userPass =
-            config.db.username && config.db.password
-                ? `${encodeURIComponent(
-                    config.db.username
-                )}:${encodeURIComponent(config.db.password)}@`
-                : null;
-
-        const url = config.db.servers.reduce(
-            (prev, cur) => prev + cur + ',',
-            `${config.db.dialect}://${userPass || ''}`
-        );
-        const finalUrl = `${url.substr(0, url.length - 1)}/${config.db.database}`;
-
-        return finalUrl;
+    _getMongoURL(configDB) {
+        const { username, password, options, servers, dialect, database } = configDB;
+        const userPass = username && password ? `${encodeURIComponent(username)}:${encodeURIComponent(password)}@` : null;
+        const url = servers.reduce((prev, cur) => prev + cur + ',', `${dialect}://${userPass}`);
+        const urlParsed = `${url.substr(0, url.length - 1)}/${database}`;
+        const authSource = `?authSource=${options.authSource}`;
+        const replicaSet = options.replicaSet ? '&replicaSet=' + options.replicaSet : '';
+        return urlParsed + authSource + replicaSet;
     }
 
     _getConnOptions(config) {
         const options = config.db.options || {};
-        options.useNewUrlParser = true;
-        options.useFindAndModify = false;
-        options.useCreateIndex = true;
-        return options;
+
+        return Object.assign(options, connectionOptions);
+    }
+
+    _setEventListeners() {
+        this.connection.on('connected', () => this.logger.info('Mongodb connection stablished'));
+        this.connection.on('disconnected', () => this.logger.error('Mongodb connection lost'));
+        this.connection.on('reconnected', () => this.logger.info('Mongodb successfully reconnected'));
+        this.connection.on('reconnectFailed', () => {
+            this.logger.error('Mongodb reconnection fail, killing the process');
+            process.exit(1);
+        });
     }
 
     async connect() {
@@ -39,12 +47,13 @@ class ProviderConnection {
             return this.connection;
 
         const opts = this._getConnOptions(this.config);
-        this.url = this._getMongoURL(this.config);
-
+        this.url = this._getMongoURL(this.config.db);
         try {
+            this.mongoose.pluralize(null);
             this.connection = await this.mongoose.createConnection(this.url, opts );
 
             this.logger.info('Mongodb connection stablished');
+            this._setEventListeners();
 
             return this.connection;
         } catch (err) {

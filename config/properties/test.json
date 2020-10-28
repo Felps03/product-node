@@ -3,7 +3,7 @@
     "db": {
         "username": "admin",
         "password": "admin",
-        "database": "product-node",
+        "database": "product-node-test",
         "servers": [
             "127.0.0.1:27017"
         ],

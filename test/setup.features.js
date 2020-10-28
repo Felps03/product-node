@@ -9,7 +9,7 @@ chai.use(spies);
 chai.use(dirtyChai);
 chai.use(chaiChange);
 
-const config = configLoader.loadLocal();
+const config = configLoader.loadEnv();
 
 const instance = container.configureContainer(config);
 
