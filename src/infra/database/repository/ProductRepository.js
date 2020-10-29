@@ -10,9 +10,9 @@ class ProductRepository {
         return await this.productModel.create(data);
     }
 
-    async get(data) {
+    async get(query, page = 1) {
 
-        return await this.productModel.find(data);
+        return await this.productModel.paginate(query, { page: page });
     }
 
     async search({ min_price = 0, max_price = PRICES.MAX_PRICE }) {
@@ -21,13 +21,14 @@ class ProductRepository {
 
     }
 
-    async update({productId, totalPrice}) {
-        
+    async update({ productId, totalPrice }) {
+
         return await this.productModel.findOneAndUpdate(
-            {id: productId}, 
-            {   lastPriceSold: totalPrice, 
+            { id: productId },
+            {
+                lastPriceSold: totalPrice,
                 lastTimeSold: Date.now(),
-                $inc: {amount: -1}
+                $inc: { amount: -1 }
             });
     }
 }

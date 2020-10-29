@@ -138,7 +138,9 @@ module.exports = ({ container }) => {
         {
             method: 'get',
             path: '/',
-            validation: {},
+            validation: {
+                query: ctx.productSchema.queryPaginate
+            },
             handler: ctx.productController.getProduct
         }
     ];

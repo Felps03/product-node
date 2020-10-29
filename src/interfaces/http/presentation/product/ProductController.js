@@ -11,7 +11,7 @@ module.exports = opts => ({
 
     getProduct: AsyncMiddleware(async ctx => {
 
-        const product = await opts.getProductOperation.execute(ctx.params);
+        const product = await opts.getProductOperation.execute(ctx);
 
         const productReady = ctx.params.id ?
             opts.productSerializer.getOne(product):

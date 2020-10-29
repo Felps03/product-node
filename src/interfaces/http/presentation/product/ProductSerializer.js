@@ -1,23 +1,26 @@
 module.exports = () => ({
-    create: ({id, name}) => {
+    create: ({ id, name }) => {
 
         return { id, name, status: 'created' };
     },
-    getOne: (products) => {
+    getOne: ({ docs }) => {
 
 
-        return products.map((product) => {
+        return docs.map((product) => {
             const { name, valueUnitary, amount, lastPriceSold, lastTimeSold } = product;
             return { name, valueUnitary, amount, lastPriceSold, lastTimeSold };
         });
     },
     getAll: (products) => {
 
+        let { docs } = products;
 
-        return products.map((product) => {
+        products.docs = docs.map((product) => {
             const { id, name, valueUnitary, amount } = product;
             return { id, name, valueUnitary, amount };
         });
+
+        return products;
     },
     search: (products) => {
 

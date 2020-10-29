@@ -7,10 +7,10 @@ class GetProductOperation {
         this.logger = logger;
     }
 
-    async execute(productId) {
+    async execute({params, query:{page}}) {
         try {
-
-            return await this.productRepository.get(productId);
+            console.log(page)
+            return await this.productRepository.get(params, page);
 
         } catch (error) {
             this.logger.error(error);

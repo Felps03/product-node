@@ -34,8 +34,15 @@ module.exports = ({ providerConnection, config }) => {
         }
     }, { versionKey: false, timestamps: true });
 
-    productSchema.plugin(paginate);
     productSchema.plugin(autoincrement, {field: 'id'});
+
+    paginate.paginate.options = {
+        lean:  false,
+        limit: 10
+      };
+
+    productSchema.plugin(paginate);
+    
 
     return connection.model(config.db.collections.product.name, productSchema);
 };
