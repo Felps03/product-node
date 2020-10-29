@@ -2,12 +2,9 @@ const container = require('src/container');
 const configLoader = require('config/configLoader');
 const cleanDatabase = require('test/support/cleanDatabase');
 const chai = require('chai');
-const dirtyChai = require('dirty-chai');
-const chaiChange = require('chai-change');
-const spies = require('chai-spies');
-chai.use(spies);
-chai.use(dirtyChai);
-chai.use(chaiChange);
+chai.use(require('chai-spies'));
+chai.use(require('dirty-chai'));
+chai.use(require('chai-change'));
 
 const config = configLoader.loadEnv();
 
@@ -15,9 +12,9 @@ const instance = container.configureContainer(config);
 
 const providerConnection = instance.resolve('providerConnection');
 
-before(async() => {
+before(async () => {
     await providerConnection.connect();
-    
+
 });
 
 afterEach(async () => cleanDatabase(providerConnection));

@@ -5,7 +5,7 @@ const autoincrement = require('simple-mongoose-autoincrement');
 
 
 
-module.exports = ({ providerConnection }) => {
+module.exports = ({ providerConnection, config }) => {
     const connection = providerConnection.connection;
 
     const purchaseSchema = new Schema({
@@ -30,7 +30,7 @@ module.exports = ({ providerConnection }) => {
     purchaseSchema.plugin(paginate);
     purchaseSchema.plugin(autoincrement, {field: 'id'});
 
-    return connection.model('purchase', purchaseSchema);
+    return connection.model(config.db.collections.purchase.name, purchaseSchema);
 };
 
 

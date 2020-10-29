@@ -12,6 +12,16 @@
         "options": {
             "authSource": "admin",
             "replicaSet": ""
+        },
+        "collections": {
+            "product": {
+                "name": "product",
+                "version": "1.0"
+            },
+            "purchase": {
+                "name": "purchase",
+                "version": "1.0"
+            }
         }
     },
     "web": {

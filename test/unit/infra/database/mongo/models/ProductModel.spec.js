@@ -7,8 +7,8 @@ describe('Infra :: Database :: Mongo :: Models :: ProductModel', () => {
     const config = {
         db: {
             collections: {
-                products: {
-                    name: 'Product'
+                product: {
+                    name: 'product'
                 }
             }
         }

@@ -8,7 +8,7 @@ describe('Infra :: Database :: Mongo :: Models :: PurchaseModel', () => {
         db: {
             collections: {
                 purchase: {
-                    name: 'Purchase'
+                    name: 'purchase'
                 }
             }
         }
