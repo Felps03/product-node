@@ -1,6 +1,6 @@
 require('dotenv').load();
 
-const ENV = 'test' || process.env.NODE_ENV  ;
+const ENV =  process.env.NODE_ENV || 'test' ;
 
 module.exports = {
     loadEnv: () => {
