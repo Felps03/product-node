@@ -10,7 +10,6 @@ module.exports = ({ container }) => {
          *      - "product"
          *      summary: "Add a new product to the stock"
          *      description: ""
-         *      operationId: "addPet"
          *      consumes:
          *      - "application/json"
          *      produces:
@@ -34,19 +33,20 @@ module.exports = ({ container }) => {
          *      - "product"
          *      summary: "Request products in stock"
          *      description: ""
-         *      operationId: "updatePet"
          *      consumes:
          *      - "application/json"
          *      produces:
          *      - "application/json"
-         *
+         *      parameters: 
+         *      - name: "page"
+         *        in: "query"
+         *        description: "Page number"
+         *        type: "integer"        
          *      responses:
          *        "200":
-         *          description: "successful operation"
-         *          schema:
-         *            type: "array"
-         *            items:
-         *              $ref: "#/definitions/SmallProduct"
+         *          description: "OK"
+         *          schema:   
+         *            $ref: "#/definitions/FullResponse"
          *      
          *        "400":
          *          description: "Bad Request" 
@@ -60,7 +60,6 @@ module.exports = ({ container }) => {
          *      - "product"
          *      summary: "Finds Product by Id"
          *      description: "This route should be use to request datails from a specific product."
-         *      operationId: "findPetsByStatus"
          *      produces:
          *      - "application/json"
          *      parameters:
@@ -99,14 +98,16 @@ module.exports = ({ container }) => {
          *      - name: "max_price"
          *        in: "query"
          *        description: "Max product price"
+         *        type: "integer" 
+         *      - name: "page"
+         *        in: "query"
+         *        description: "Page number"
          *        type: "integer"        
          *      responses:
          *        "200":
-         *          description: "successful operation"
+         *          description: "OK"
          *          schema:
-         *            type: "array"
-         *            items:
-         *              $ref: "#/definitions/SmallProduct"
+         *            $ref: "#/definitions/FullResponse"
          *        "400":
          *          description: "Invalid status value"
          */

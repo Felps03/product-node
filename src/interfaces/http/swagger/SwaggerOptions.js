@@ -28,6 +28,21 @@ module.exports = ({ config }) => {
                         monthlyInterestRate: { type: 'string', example: '2.5%' }
                     }
                 },
+                FullResponse: {
+                    type: 'object',
+                    properties: {
+                        docs: { type: 'array', items: { '$ref': '#/definitions/SmallProduct' } },
+                        totalDocs: { type: 'integer', example: 40 },
+                        limit: { type: 'integer', example: 10 },
+                        totalPages: { type: 'integer', example: 3 },
+                        page: { type: 'integer', example: 1 },
+                        pagingCounter: { type: 'integer', example: 1 },
+                        hasPrevPage: { type: 'boolean', example: false },
+                        hasNextPage: { type: 'boolean', example: true },
+                        prevPage: { type: ['boolean','null'], example: null },
+                        nextPage:  { type: ['boolean','null'], example: true }
+                    }
+                },
                 FullProduct:
                 {
                     type: 'object',

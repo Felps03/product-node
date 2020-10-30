@@ -21,7 +21,7 @@ module.exports = ({
         .use(cors())
         .use(bodyParser.json())
         .use(compression())
-        .use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions)))
+        .use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions), { swaggerOptions: { defaultModelsExpandDepth: -1 } }))
         .use('/api/products', container.cradle.routerRegister.register(container.cradle.productRouter))
         .use('/api/purchase', container.cradle.routerRegister.register(container.cradle.purchaseRouter))
         .use((req, res, next) => { next(exception.notFound()); })
