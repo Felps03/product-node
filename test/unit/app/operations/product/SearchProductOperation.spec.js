@@ -9,15 +9,26 @@ describe('App :: Operations :: Product :: SearchProductOperation', () => {
             let searchProductOperation, productRepository, productFromDatabase, productRequestedRange, logger;
 
             before(() => {
-                productFromDatabase = [{
-                    id: 20,
-                    name: 'BeautifulProduct',
-                    valueUnitary: 750,
-                    amount: 99,
-                    lastPriceSold: 750,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                }];
+                productFromDatabase = {
+                    docs: [{
+                        id: 20,
+                        name: 'BeautifulProduct',
+                        valueUnitary: 750,
+                        amount: 99,
+                        lastPriceSold: 750,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
                 productRequestedRange = {
                     min_price: 600,
@@ -45,7 +56,7 @@ describe('App :: Operations :: Product :: SearchProductOperation', () => {
             });
         });
 
-        
+
         context('when occurs error', () => {
 
             let productRepository, searchProductOperation, logger;

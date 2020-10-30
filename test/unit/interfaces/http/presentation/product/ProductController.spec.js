@@ -114,6 +114,9 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                     params: {
                         id: 9
                     },
+                    query:{
+                        page: 1
+                    },
                     res: {
                         status: () => ({
                             json: () => (productSerialized)
@@ -131,7 +134,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
             it(' returns product data ', async () => {
 
                 const response = await productController.getProduct(ctx);
-                expect(opts.getProductOperation.execute).to.have.been.called.once.with.exactly(ctx.params);
+                expect(opts.getProductOperation.execute).to.have.been.called.once.with.exactly(ctx);
                 expect(opts.productSerializer.getOne).to.have.been.called.once.with.exactly(productFromDatabase);
                 expect(ctx.res.status).to.have.been.called.once();
                 expect(response).to.deep.equal(productSerialized);

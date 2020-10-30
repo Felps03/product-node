@@ -6,21 +6,35 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
     describe('#execute', () => {
         context('when an unique product was requested with success', () => {
 
-            let getProductOperation, productRepository, productFromDatabase, productRequestedId, logger;
+            let getProductOperation, productRepository, productFromDatabase, request, logger;
 
             before(() => {
-                productFromDatabase = [{
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                }];
+                productFromDatabase = {
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
 
-                productRequestedId = {
-                    id: 9
+                };
+
+                request = {
+                    params: { id: 9 },
+                    query: {page: 1}
+
                 };
 
                 productRepository = {
@@ -37,39 +51,51 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
             });
 
             it('returns requested product', async () => {
-                const response = await getProductOperation.execute(productRequestedId);
-
+                const response = await getProductOperation.execute(request);
+               
                 expect(response).to.be.deep.equal(productFromDatabase);
-                expect(productRepository.get).to.be.called.once.with.exactly(productRequestedId);
+                expect(productRepository.get).to.be.called.once.with.exactly(request.params,request.query.page);
             });
         });
 
         context('when more than one product was requested with success', () => {
 
-            let getProductOperation, productRepository, productFromDatabase, productRequestedId, logger;
+            let getProductOperation, productRepository, productFromDatabase, request, logger;
 
             before(() => {
-                productFromDatabase = [{
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                },
-                {
-                    id: '10',
-                    name: 'AnotherProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                }];
+                productFromDatabase = {
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    },
+                    {
+                        id: 10,
+                        name: 'AnotherProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
-                productRequestedId = {
-                    id: ''
+                request = {
+                    params:{id : ''},
+                    query:{page : ''}
                 };
 
                 productRepository = {
@@ -86,10 +112,10 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
             });
 
             it('returns an array with requested products', async () => {
-                const response = await getProductOperation.execute(productRequestedId);
+                const response = await getProductOperation.execute(request);
 
                 expect(response).to.be.deep.equal(productFromDatabase);
-                expect(productRepository.get).to.be.called.once.with.exactly(productRequestedId);
+                expect(productRepository.get).to.be.called.once.with.exactly(request.params, request.query.page);
             });
         });
 

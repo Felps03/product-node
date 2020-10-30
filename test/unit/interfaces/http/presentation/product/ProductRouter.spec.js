@@ -29,7 +29,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductRouter', () =>
                 {
                     method: 'get',
                     path: '/',
-                    validation: {},
+                    validation: { query: null },
                     handler: null
                 }
             ];
@@ -38,7 +38,8 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductRouter', () =>
                     productSchema: {
                         query: null,
                         params: null,
-                        create: null
+                        create: null,
+                        queryPaginate: null
                     },
                     productController: {
                         getProduct: null,

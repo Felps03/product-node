@@ -44,6 +44,7 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
             before(() => {
 
                 productSerialized = [{
+                    id: 9,
                     name: 'SomeProduct',
                     valueUnitary: 999,
                     amount: 99,
@@ -51,15 +52,25 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
                     lastTimeSold: '2020-10-15T11:50:15.522Z',
                 }];
 
-                productFromDatabase = [{
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                }];
+                productFromDatabase = {
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
                 productSerializer = ProductSerializer();
             });
@@ -78,37 +89,56 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
 
             before(() => {
 
-                productSerialized = [{
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                },
-                {
-                    id: 10,
-                    name: 'AnotherProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                }];
+                productSerialized = {
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                    },
+                    {
+                        id: 10,
+                        name: 'OtherProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
-                productFromDatabase = [{
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                },
-                {
-                    id: 10,
-                    name: 'AnotherProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                }];
+                productFromDatabase = {
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                    }, {
+                        id: 10,
+                        name: 'OtherProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
                 productSerializer = ProductSerializer();
             });
@@ -127,35 +157,57 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductSerializer', (
 
             before(() => {
 
-                productSerialized = [{
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                },
-                {
-                    name: 'AnotherProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                }];
+                productSerialized = {
+                    docs: [{
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                    },
+                    {
+                        name: 'AnotherProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
-                productFromDatabase = [{
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                },
-                {
-                    id: 10,
-                    name: 'AnotherProduct',
-                    valueUnitary: 999,
-                    amount: 99,
-                    lastPriceSold: 999,
-                    lastTimeSold: '2020-10-15T11:50:15.522Z',
-                    created_at: '2020-10-13T11:55:15.522Z',
-                }];
+                productFromDatabase ={
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    },
+                    {
+                        id: 10,
+                        name: 'AnotherProduct',
+                        valueUnitary: 999,
+                        amount: 99,
+                        lastPriceSold: 999,
+                        lastTimeSold: '2020-10-15T11:50:15.522Z',
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
+                };
 
                 productSerializer = ProductSerializer();
             });

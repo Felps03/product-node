@@ -27,13 +27,24 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                 };
 
                 productFromDatabase = {
-                    id: 9,
-                    name: 'SomeProduct',
-                    valueUnitary: 500,
-                    amount: 99,
-                    lastPriceSold: null,
-                    lastTimeSold: null,
-                    created_at: '2020-10-13T11:55:15.522Z',
+                    docs: [{
+                        id: 9,
+                        name: 'SomeProduct',
+                        valueUnitary: 500,
+                        amount: 99,
+                        lastPriceSold: null,
+                        lastTimeSold: null,
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
                 };
 
                 productFromDatabaseUpdated = {
@@ -104,7 +115,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                 expect(productRepository.get).to.be.called.once.with.exactly({ id: purchaseToBeCreated.product });
                 expect(productRepository.update).to.be.called.once.with.exactly(purchaseApproved);
                 expect(purchaseRepository.create).to.be.called.once.with.exactly(purchaseApproved);
-                expect(purchaseValidator.validate).to.be.called.once.with.exactly(purchaseToBeCreated, productFromDatabase);
+                expect(purchaseValidator.validate).to.be.called.once.with.exactly(purchaseToBeCreated, productFromDatabase.docs);
             });
         });
 
@@ -131,13 +142,24 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                 };
 
                 productFromDatabase = {
-                    id: 10,
-                    name: 'SomeProduct',
-                    valueUnitary: 240,
-                    amount: 99,
-                    lastPriceSold: null,
-                    lastTimeSold: null,
-                    created_at: '2020-10-13T11:55:15.522Z',
+                    docs: [{
+                        id: 10,
+                        name: 'SomeProduct',
+                        valueUnitary: 240,
+                        amount: 99,
+                        lastPriceSold: null,
+                        lastTimeSold: null,
+                        created_at: '2020-10-13T11:55:15.522Z',
+                    }],
+                    totalDocs: 22,
+                    limit: 10,
+                    totalPages: 3,
+                    page: 1,
+                    pagingCounter: 1,
+                    hasPrevPage: false,
+                    hasNextPage: true,
+                    prevPage: null,
+                    nextPage: 2
                 };
 
                 productFromDatabaseUpdated = {
@@ -260,7 +282,7 @@ describe('App :: Operations :: Purchase :: CreatePurchaseOperation', () => {
                 expect(productRepository.get).to.be.called.once.with.exactly({ id: purchaseToBeCreated.product });
                 expect(productRepository.update).to.be.called.once.with.exactly(purchaseApproved);
                 expect(purchaseRepository.create).to.be.called.once.with.exactly(purchaseApproved);
-                expect(purchaseValidator.validate).to.be.called.once.with.exactly(purchaseToBeCreated, productFromDatabase);
+                expect(purchaseValidator.validate).to.be.called.once.with.exactly(purchaseToBeCreated, productFromDatabase.docs);
             });
         });
 

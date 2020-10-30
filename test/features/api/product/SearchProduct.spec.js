@@ -53,7 +53,7 @@ describe('API :: GET /api/products/search', () => {
                 .get('/api/products/search')
                 .query({ min_price: 100, max_price: 200 })
                 .expect(200);
-            
+
             const { error } = productResponseSchema.search.validate(body);
             expect(error).to.be.not.exist();
         });
@@ -62,12 +62,12 @@ describe('API :: GET /api/products/search', () => {
     context('Request a inexistent product', async () => {
 
         it('returns an empty array', async () => {
-            const { body } = await request()
+            const { body: { docs } } = await request()
                 .get('/api/products/search')
                 .query({ min_price: 10000 })
                 .expect(200);
 
-            expect(body).to.be.eqls([]);
+            expect(docs).to.be.eqls([]);
         });
     });
 });
