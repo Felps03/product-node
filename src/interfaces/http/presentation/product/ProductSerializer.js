@@ -7,8 +7,8 @@ module.exports = () => ({
 
 
         return docs.map((product) => {
-            const { name, valueUnitary, amount, lastPriceSold, lastTimeSold } = product;
-            return { name, valueUnitary, amount, lastPriceSold, lastTimeSold };
+            const { id, name, valueUnitary, amount, lastPriceSold, lastTimeSold } = product;
+            return { id, name, valueUnitary, amount, lastPriceSold, lastTimeSold };
         });
     },
     getAll: (products) => {

@@ -10,9 +10,9 @@ class ProductRepository {
         return await this.productModel.create(data);
     }
 
-    async get(query, page = 1) {
+    async get(productId, page = 1) {
 
-        return await this.productModel.paginate(query, { page: page });
+        return await this.productModel.paginate(productId, { page: page });
     }
 
     async search({ min_price = 0, max_price = PRICES.MAX_PRICE, page = 1 }) {
