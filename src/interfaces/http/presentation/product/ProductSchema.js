@@ -17,7 +17,8 @@ module.exports = () => ({
     }),
     query: joi.object().keys({
         max_price: joi.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
-        min_price: joi.number().min(MIN_AMOUNT).max(MAX_AMOUNT)
+        min_price: joi.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
+        page: joi.number()
     }),
 
     queryPaginate: joi.object().keys({

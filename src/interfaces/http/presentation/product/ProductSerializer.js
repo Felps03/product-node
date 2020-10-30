@@ -24,9 +24,13 @@ module.exports = () => ({
     },
     search: (products) => {
 
-        return products.map((product) => {
+        let { docs } = products;
+
+        products.docs = docs.map((product) => {
             const { name, valueUnitary, amount } = product;
             return { name, valueUnitary, amount };
         });
+
+        return products;
     }
 });

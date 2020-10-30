@@ -15,9 +15,9 @@ class ProductRepository {
         return await this.productModel.paginate(query, { page: page });
     }
 
-    async search({ min_price = 0, max_price = PRICES.MAX_PRICE }) {
+    async search({ min_price = 0, max_price = PRICES.MAX_PRICE, page = 1 }) {
 
-        return await this.productModel.find({ valueUnitary: { $gte: min_price, $lte: max_price } });
+        return await this.productModel.paginate({ valueUnitary: { $gte: min_price, $lte: max_price } }, { page: page });
 
     }
 

@@ -7,10 +7,10 @@ class SearchProductOperation {
         this.logger = logger;
     }
 
-    async execute(range) {
+    async execute(query) {
         try {
 
-            return await this.productRepository.search(range);
+            return await this.productRepository.search(query);
 
         } catch (error) {
             this.logger.error(error);

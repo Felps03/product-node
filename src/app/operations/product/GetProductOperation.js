@@ -7,9 +7,9 @@ class GetProductOperation {
         this.logger = logger;
     }
 
-    async execute({params, query:{page}}) {
+    async execute({ params, query: { page } }) {
         try {
-            console.log(page)
+
             return await this.productRepository.get(params, page);
 
         } catch (error) {
