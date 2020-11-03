@@ -110,4 +110,118 @@ describe('API :: POST /api/purchase', () => {
             expect(error).to.be.not.exist();
         });
     });
+
+
+
+    context('Try to make a purchase of a product unavailable', async () => {
+        let purchase;
+        beforeEach(async () => {
+
+            purchase = {
+                'product': 9999999,
+                'paymentCondition': {
+                    'inputValue': 200,
+                    'numberOfInstallments': 1
+                }
+            };
+
+        });
+
+        it('returns bad request - Product unavailable', async () => {
+            const { body } = await request()
+                .post('/api/purchase')
+                .send(purchase)
+                .expect(400);
+
+            expect(body.message).to.be.eql('Bad Request');
+
+            const message = body.details.shift();
+            expect(message).to.be.eql('Product unavailable');
+
+        });
+    });
+
+    context('Try to make a purchase of a product that is sold out', async () => {
+        let purchase, product;
+        beforeEach(async () => {
+
+            product = {
+                'product': {
+                    'name': 'Calculadora Von Neumann',
+                    'valueUnitary': 170,
+                    'amount': 1
+                }
+            };
+
+            let { body } = await request()
+                .post('/api/products')
+                .send(product);
+
+            purchase = {
+                'product': body.id,
+                'paymentCondition': {
+                    'inputValue': 170,
+                    'numberOfInstallments': 7
+                }
+            };
+
+            await request()
+                .post('/api/purchase')
+                .send(purchase);
+        });
+
+
+        it('returns bad request - Product Sold Out', async () => {
+            const { body } = await request()
+                .post('/api/purchase')
+                .send(purchase)
+                .expect(400);
+
+            expect(body.message).to.be.eql('Bad Request');
+
+            const message = body.details.shift();
+            expect(message).to.be.eql('Sold Out');
+
+        });
+    });
+
+    context('Try to make a purchase of a product with input value lower than product price', async () => {
+        let purchase, product;
+        beforeEach(async () => {
+
+            product = {
+                'product': {
+                    'name': 'Calculadora Von Neumann',
+                    'valueUnitary': 170,
+                    'amount': 1
+                }
+            };
+
+            let { body } = await request()
+                .post('/api/products')
+                .send(product);
+
+            purchase = {
+                'product': body.id,
+                'paymentCondition': {
+                    'inputValue': 160,
+                    'numberOfInstallments': 1
+                }
+            };
+        });
+
+
+        it('returns bad request - Insuggicient Funds', async () => {
+            const { body } = await request()
+                .post('/api/purchase')
+                .send(purchase)
+                .expect(400);
+
+            expect(body.message).to.be.eql('Bad Request');
+
+            const message = body.details.shift();
+            expect(message).to.be.eql('Insufficient funds');
+
+        });
+    });
 });

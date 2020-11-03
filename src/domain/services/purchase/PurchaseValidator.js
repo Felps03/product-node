@@ -1,24 +1,28 @@
-const { TAXES:{SELIC:{ VALUE, START_INSTALLMENTS, PERCENT}} } = require('src/domain/services/purchase/PurchaseConstants')();
+const { TAXES: { SELIC: { VALUE, START_INSTALLMENTS, PERCENT } } } = require('src/domain/services/purchase/PurchaseConstants')();
 
-module.exports = () => ({
+module.exports = ({ exception }) => ({
 
     validate: ({ paymentCondition }, productFromDatabase) => {
 
         const { inputValue, numberOfInstallments } = paymentCondition;
+        
+        let totalPrice = 0;
+        let installments = [];
+
+        if(!productFromDatabase.length)
+            throw exception.badRequest(['Product unavailable']);
+
         const { valueUnitary, amount, id } = productFromDatabase.shift();
 
         const installmentValue = (valueUnitary / numberOfInstallments);
         const taxValue = (valueUnitary * VALUE);
-
-        let totalPrice = 0;
-        let installments = [];
-
-
+        
         if (!amount)
-            return new Error('Sold out');
+            throw exception.badRequest(['Sold Out']);
 
         if (inputValue < valueUnitary)
-            return new Error('Insufficient funds');
+            throw exception.badRequest(['Insufficient funds']);
+
 
 
         for (let i = 1; i <= numberOfInstallments; i++) {

@@ -1,5 +1,4 @@
 const joi = require('joi');
-const { number } = require('node_modules/joi/lib/index');
 const { PRICES: { MAX_PRICE, MIN_PRICE },
     AMOUNT: { MIN_AMOUNT, MAX_AMOUNT },
     NAME: { MIN_LENGTH, MAX_LENGTH }

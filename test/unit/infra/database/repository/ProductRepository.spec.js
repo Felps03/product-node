@@ -129,6 +129,52 @@ describe('Infra :: Database :: Repository :: ProductRepository', () => {
         });
     });
 
+    context('When a product is requested with no filters', () => {
+
+        beforeEach(() => {
+            productFromDatabase = {
+                docs: [{
+                    id: 9,
+                    name: 'SomeProduct',
+                    valueUnitary: 500,
+                    amount: 99,
+                    lastPriceSold: 500,
+                    lastTimeSold: '2020-10-15T11:50:15.522Z',
+                    created_at: '2020-10-13T11:55:15.522Z',
+                }],
+                totalDocs: 22,
+                limit: 10,
+                totalPages: 3,
+                page: 1,
+                pagingCounter: 1,
+                hasPrevPage: false,
+                hasNextPage: true,
+                prevPage: null,
+                nextPage: 2
+            };
+
+            productModel = {
+                paginate: () => Promise.resolve(productFromDatabase)
+            };
+
+            productRequested = {
+                min_price: null,
+                max_price: null,
+                page: null
+            };
+
+            spy.on(productModel, 'paginate');
+            productRepository = new ProductRepository({ productModel });
+        });
+
+        it(' returns all products from first page ', async () => {
+
+            const response = await productRepository.search(productRequested);
+            expect(productModel.paginate).to.be.called.once();
+            expect(response).to.deep.equal(productFromDatabase);
+        });
+    });
+
     context('When a product is updated with success', () => {
 
         beforeEach(() => {

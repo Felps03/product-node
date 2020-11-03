@@ -39,7 +39,7 @@ module.exports = ({ providerConnection, config }) => {
     paginate.paginate.options = {
         lean:  false,
         limit: 10
-      };
+    };
 
     productSchema.plugin(paginate);
     

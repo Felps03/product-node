@@ -39,8 +39,8 @@ module.exports = ({ config }) => {
                         pagingCounter: { type: 'integer', example: 1 },
                         hasPrevPage: { type: 'boolean', example: false },
                         hasNextPage: { type: 'boolean', example: true },
-                        prevPage: { type: ['boolean','null'], example: null },
-                        nextPage:  { type: ['boolean','null'], example: true }
+                        prevPage: { type: ['boolean', 'null'], example: null },
+                        nextPage:  { type: ['boolean', 'null'], example: true }
                     }
                 },
                 FullProduct:

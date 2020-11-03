@@ -54,7 +54,7 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
                 const response = await getProductOperation.execute(request);
                
                 expect(response).to.be.deep.equal(productFromDatabase);
-                expect(productRepository.get).to.be.called.once.with.exactly(request.params,request.query.page);
+                expect(productRepository.get).to.be.called.once.with.exactly(request.params, request.query.page);
             });
         });
 
