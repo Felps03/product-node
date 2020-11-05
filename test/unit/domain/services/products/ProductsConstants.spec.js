@@ -3,7 +3,9 @@ const ProductsConstants = require('src/domain/services/products/ProductsConstant
 
 
 describe('Domain :: Services :: Products :: ProductsConstants', () => {
+    
     let productsConstants, data;
+    
     context('When ProductsConstants is requested', ()=>{
     
         beforeEach(() =>{

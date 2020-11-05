@@ -33,7 +33,7 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
                 request = {
                     params: { id: 9 },
-                    query: {page: 1}
+                    query: { page: 1 }
 
                 };
 
@@ -52,7 +52,7 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
             it('returns requested product', async () => {
                 const response = await getProductOperation.execute(request);
-               
+
                 expect(response).to.be.deep.equal(productFromDatabase);
                 expect(productRepository.get).to.be.called.once.with.exactly(request.params, request.query.page);
             });
@@ -94,8 +94,8 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
                 };
 
                 request = {
-                    params:{id : ''},
-                    query:{page : ''}
+                    params: { id: '' },
+                    query: { page: '' }
                 };
 
                 productRepository = {
@@ -121,9 +121,16 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
         context('when occurs error', () => {
 
-            let productRepository, getProductOperation, logger;
+            let productRepository, getProductOperation, logger, request;
 
             before(() => {
+
+                request = {
+                    params: { id: 9 },
+                    query: { page: 1 }
+
+                };
+
                 productRepository = {
                     get: () => Promise.reject(new Error('test'))
                 };
@@ -134,14 +141,18 @@ describe('App :: Operations :: Product :: GetProductOperation', () => {
 
                 getProductOperation = new GetProductOperation({ productRepository, logger });
                 spy.on(productRepository, 'get');
+                spy.on(logger, 'error');
             });
 
             it('throws error', done => {
                 getProductOperation
-                    .execute({})
+                    .execute(request)
                     .then(done => done('Must be an error'))
                     .catch(error => {
                         expect(error).to.be.exist();
+                        expect(error.message).to.be.eql('test');
+                        expect(productRepository.get).to.have.been.called.once();
+                        expect(logger.error).to.have.been.called.once();
                         done();
                     });
             });

@@ -11,7 +11,7 @@ class GetProductOperation {
         try {
 
             return await this.productRepository.get(params, page);
-
+            
         } catch (error) {
             this.logger.error(error);
             throw error;
