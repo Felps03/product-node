@@ -24,6 +24,9 @@ module.exports = ({
         .use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions), { swaggerOptions: { defaultModelsExpandDepth: -1 } }))
         .use('/api/products', container.cradle.routerRegister.register(container.cradle.productRouter))
         .use('/api/purchase', container.cradle.routerRegister.register(container.cradle.purchaseRouter))
+        .use('/api/register', container.cradle.routerRegister.register(container.cradle.userRouter))
+        .use('/api/authenticate', container.cradle.routerRegister.register(container.cradle.authenticateUserRouter))
+
         .use((req, res, next) => { next(exception.notFound()); })
         .use(httpErrorMiddleware);
 
