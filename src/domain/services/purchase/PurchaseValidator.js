@@ -5,18 +5,17 @@ module.exports = ({ exception }) => ({
     validate: ({ paymentCondition }, productFromDatabase) => {
 
         const { inputValue, numberOfInstallments } = paymentCondition;
-        
-        let totalPrice = 0;
-        let installments = [];
 
-        if(!productFromDatabase.length)
+        let totalPrice = 0;
+
+        if (!productFromDatabase.length)
             throw exception.badRequest(['Product unavailable']);
 
         const { valueUnitary, amount, id } = productFromDatabase.shift();
 
         const installmentValue = (valueUnitary / numberOfInstallments);
         const taxValue = (valueUnitary * VALUE);
-        
+
         if (!amount)
             throw exception.badRequest(['Sold Out']);
 
@@ -24,28 +23,24 @@ module.exports = ({ exception }) => ({
             throw exception.badRequest(['Insufficient funds']);
 
 
-
-        for (let i = 1; i <= numberOfInstallments; i++) {
-            numberOfInstallments >= START_INSTALLMENTS ?
-                installments.push(
-                    {
-                        numberOfInstallment: i,
-                        value: parseFloat((installmentValue + taxValue).toFixed(2)),
-                        monthlyInterestRate: PERCENT
-                    }) :
-                installments.push(
-                    {
-                        numberOfInstallment: i,
-                        value: parseFloat(installmentValue.toFixed(2))
-                    });
-            totalPrice += installments[i - 1].value;
-        }
+        const installments = new Array(numberOfInstallments).fill().map((e, i) => {
+            return numberOfInstallments >= START_INSTALLMENTS ?
+                {
+                    numberOfInstallment: i + 1,
+                    value: parseFloat((installmentValue + taxValue).toFixed(2)),
+                    monthlyInterestRate: PERCENT
+                } :
+                {
+                    numberOfInstallment: i + 1,
+                    value: parseFloat(installmentValue.toFixed(2))
+                };
+        });
 
         return {
             productId: id,
             paymentCondition,
             installments: installments,
-            totalPrice
+            totalPrice: installments.reduce((acc, act) => acc + act.value, totalPrice)
         };
     }
 });
