@@ -36,6 +36,9 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                         code: ({
                             CREATED: 'created'
                         })
+                    },
+                    authMiddleware: {
+                        execute: () =>  Promise.resolve(true)
                     }
                 };
 
@@ -49,6 +52,9 @@ describe('Interfaces :: Http :: Presentation :: Product :: ProductController', (
                         status: () => ({
                             json: () => (productSerialized)
                         })
+                    },
+                    headers:{
+                        authorization: 'sometoken'
                     }
                 };
 

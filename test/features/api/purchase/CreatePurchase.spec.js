@@ -1,13 +1,18 @@
 const { expect } = require('chai');
 const purchaseResponseSchema = require('test/support/schema/PurchaseResponseSchema');
 const request = require('test/support/request');
+const GenerateUserToken = require('src/domain/services/user/GenerateUserToken');
+const config = require('config/properties/test.json');
 
 
 describe('API :: POST /api/purchase', () => {
 
     context('Make a purchase with success', async () => {
-        let product, purchase;
+        let product, purchase, generateUserToken, token;
         beforeEach(async () => {
+
+            generateUserToken = GenerateUserToken({ config });
+            token = generateUserToken.generate();
 
             product = {
                 'product': {
@@ -19,6 +24,7 @@ describe('API :: POST /api/purchase', () => {
 
             let { body } = await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(product);
 
             purchase = {
@@ -28,11 +34,14 @@ describe('API :: POST /api/purchase', () => {
                     'numberOfInstallments': 1
                 }
             };
+
+
         });
 
         it('returns an array with istallments', async () => {
             const { body } = await request()
                 .post('/api/purchase')
+                .set('Authorization', 'Bearer ' + token)
                 .send(purchase)
                 .expect(200);
 
@@ -42,8 +51,11 @@ describe('API :: POST /api/purchase', () => {
     });
 
     context('Make a purchase with taxes successfully', async () => {
-        let product, purchase, response;
+        let product, purchase, response, generateUserToken, token;
         beforeEach(async () => {
+
+            generateUserToken = GenerateUserToken({ config });
+            token = generateUserToken.generate();
 
             product = {
                 'product': {
@@ -55,6 +67,7 @@ describe('API :: POST /api/purchase', () => {
 
             let { body } = await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(product);
 
             purchase = {
@@ -103,6 +116,7 @@ describe('API :: POST /api/purchase', () => {
             const { body } = await request()
                 .post('/api/purchase')
                 .send(purchase)
+                .set('Authorization', 'Bearer ' + token)
                 .expect(200);
 
             const { error } = purchaseResponseSchema.createWithTaxes.validate(body);
@@ -114,8 +128,11 @@ describe('API :: POST /api/purchase', () => {
 
 
     context('Try to make a purchase of a product unavailable', async () => {
-        let purchase;
+        let purchase, generateUserToken, token;
         beforeEach(async () => {
+
+            generateUserToken = GenerateUserToken({ config });
+            token = generateUserToken.generate();
 
             purchase = {
                 'product': 9999999,
@@ -130,6 +147,7 @@ describe('API :: POST /api/purchase', () => {
         it('returns bad request - Product unavailable', async () => {
             const { body } = await request()
                 .post('/api/purchase')
+                .set('Authorization', 'Bearer ' + token)
                 .send(purchase)
                 .expect(400);
 
@@ -142,8 +160,11 @@ describe('API :: POST /api/purchase', () => {
     });
 
     context('Try to make a purchase of a product that is sold out', async () => {
-        let purchase, product;
+        let purchase, product, generateUserToken, token;
         beforeEach(async () => {
+
+            generateUserToken = GenerateUserToken({ config });
+            token = generateUserToken.generate();
 
             product = {
                 'product': {
@@ -155,6 +176,7 @@ describe('API :: POST /api/purchase', () => {
 
             let { body } = await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(product);
 
             purchase = {
@@ -167,6 +189,7 @@ describe('API :: POST /api/purchase', () => {
 
             await request()
                 .post('/api/purchase')
+                .set('Authorization', 'Bearer ' + token)
                 .send(purchase);
         });
 
@@ -174,6 +197,7 @@ describe('API :: POST /api/purchase', () => {
         it('returns bad request - Product Sold Out', async () => {
             const { body } = await request()
                 .post('/api/purchase')
+                .set('Authorization', 'Bearer ' + token)
                 .send(purchase)
                 .expect(400);
 
@@ -186,9 +210,12 @@ describe('API :: POST /api/purchase', () => {
     });
 
     context('Try to make a purchase of a product with input value lower than product price', async () => {
-        let purchase, product;
+        let purchase, product, generateUserToken, token;
         beforeEach(async () => {
 
+            generateUserToken = GenerateUserToken({config});  
+            token = generateUserToken.generate();    
+            
             product = {
                 'product': {
                     'name': 'Calculadora Von Neumann',
@@ -199,6 +226,7 @@ describe('API :: POST /api/purchase', () => {
 
             let { body } = await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(product);
 
             purchase = {
@@ -214,6 +242,7 @@ describe('API :: POST /api/purchase', () => {
         it('returns bad request - Insuggicient Funds', async () => {
             const { body } = await request()
                 .post('/api/purchase')
+                .set('Authorization', 'Bearer ' + token)
                 .send(purchase)
                 .expect(400);
 

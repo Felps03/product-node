@@ -42,6 +42,9 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
                         code: ({
                             OK: 'ok'
                         })
+                    },
+                    authMiddleware: {
+                        execute: () =>  Promise.resolve(true)
                     }
                 };
 
@@ -57,6 +60,9 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
                         status: () => ({
                             json: () => (purchaseSerialized)
                         })
+                    },
+                    headers:{
+                        authorization: 'sometoken'
                     }
                 };
 
@@ -85,6 +91,9 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
                 opts = {
                     createPurchaseOperation: {
                         execute: () => Promise.Reject({ error_code: 'teste' })
+                    },
+                    authMiddleware: {
+                        execute: () =>  Promise.resolve(true)
                     }
                 };
 
@@ -100,6 +109,9 @@ describe('Interfaces :: Http :: Presentation :: Purchase :: PurchaseController',
                         status: () => ({
                             json: () => ({})
                         })
+                    },
+                    headers:{
+                        authorization: 'sometoken'
                     }
                 };
 

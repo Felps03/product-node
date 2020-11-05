@@ -1,12 +1,15 @@
 const { expect } = require('chai');
 const productResponseSchema = require('test/support/schema/ProductResponseSchema');
 const request = require('test/support/request');
+const GenerateUserToken = require('src/domain/services/user/GenerateUserToken');
+const config = require('config/properties/test.json');
 
 
 describe('API :: POST /api/products', () => {
 
     context('Create product with success', async () => {
-        let bodyCreateProduct;
+        let bodyCreateProduct, token, generateUserToken;
+
         beforeEach(async () => {
             bodyCreateProduct = {
                 'product': {
@@ -15,11 +18,16 @@ describe('API :: POST /api/products', () => {
                     'amount': 90
                 }
             };
+
+            generateUserToken = GenerateUserToken({config});
+
+            token = generateUserToken.generate();
         });
 
         it('Create product with all fields', async () => {
             const { body } = await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(bodyCreateProduct)
                 .expect(201);
 
@@ -30,7 +38,7 @@ describe('API :: POST /api/products', () => {
 
     context('Create product without value, name and amount', async () => {
         let bodyCreateProduct;
-        beforeEach(async () => bodyCreateProduct = {'product':{}});
+        beforeEach(async () => bodyCreateProduct = { 'product': {} });
         it('returns bad request error', async () => {
             const { body } = await request()
                 .post('/api/products')

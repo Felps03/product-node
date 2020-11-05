@@ -1,13 +1,18 @@
 const { expect } = require('chai');
 const productResponseSchema = require('test/support/schema/ProductResponseSchema');
 const request = require('test/support/request');
+const GenerateUserToken = require('src/domain/services/user/GenerateUserToken');
+const config = require('config/properties/test.json');
 
 
 describe('API :: GET /api/products/search', () => {
 
     context('Request products with price range successfully', async () => {
-        let productOne, productTwo, productThree;
+        let productOne, productTwo, productThree, generateUserToken, token;
         beforeEach(async () => {
+
+            generateUserToken = GenerateUserToken({config});
+            token = generateUserToken.generate();
 
             productOne = {
                 'product': {
@@ -35,14 +40,17 @@ describe('API :: GET /api/products/search', () => {
 
             await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(productOne);
 
             await request()
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(productTwo);
 
             await request(productThree)
                 .post('/api/products')
+                .set('Authorization', 'Bearer ' + token)
                 .send(productThree);
 
 
