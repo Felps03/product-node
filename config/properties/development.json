@@ -21,6 +21,10 @@
             "purchase": {
                 "name": "purchase",
                 "version": "1.0"
+            },
+            "user": {
+                "name": "user",
+                "version": "1.0"
             }
         }
     },
@@ -34,6 +38,9 @@
         "domain": "https://localhost:4000/"
     },
     "stackError": {
-        "isVisible": false
+        "isVisible": true
+    },
+    "auth":{
+        "secret": "2cl3k4m5%L&l52m"
     }
 }

@@ -21,6 +21,10 @@
             "purchase": {
                 "name": "purchase",
                 "version": "1.0"
+            },
+            "user": {
+                "name": "user",
+                "version": "1.0"
             }
         }
     },
