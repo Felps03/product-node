@@ -40,6 +40,20 @@ const HttpErrors = class extends Error {
         );
     }
 
+    static unauthorized(
+        errors,
+        message = HttpConstants.message.UNAUTHORIZED,
+        errorCode = '',
+        statusCode = HttpConstants.code.UNAUTHORIZED
+    ) {
+        return new HttpErrors(
+            Object.assign({ message, errors }),
+            statusCode,
+            errorCode ? errorCode : statusCode,
+            true
+        );
+    }
+
     static notFound(
         message = HttpConstants.message.NOT_FOUND,
         key,

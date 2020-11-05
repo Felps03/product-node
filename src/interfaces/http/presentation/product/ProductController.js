@@ -2,7 +2,9 @@ const AsyncMiddleware = require('src/interfaces/http/presentation/middlewares/As
 
 module.exports = opts => ({
     createProduct: AsyncMiddleware(async ctx => {
-
+        
+        await opts.authMiddleware.execute(ctx.headers.authorization);
+        
         const product = await opts.createProductOperation.execute(ctx.body);
         const productReady = opts.productSerializer.create(product);
 
