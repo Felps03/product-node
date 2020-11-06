@@ -19,26 +19,28 @@ describe('API :: POST /api/products', () => {
                 }
             };
 
-            generateUserToken = GenerateUserToken({config});
-
+            generateUserToken = GenerateUserToken({ config });
             token = generateUserToken.generate();
         });
 
-        it('Create product with all fields', async () => {
+        it('returns product id, name and status', async () => {
             const { body } = await request()
                 .post('/api/products')
                 .set('Authorization', 'Bearer ' + token)
                 .send(bodyCreateProduct)
                 .expect(201);
 
-            const { error } = productResponseSchema.create.validate(body);
-            expect(error).to.be.not.exist();
+            expect(body).to.have.property('id');
+            expect(body).to.have.property('name');
+            expect(body).to.have.property('status');
         });
     });
 
-    context('Create product without value, name and amount', async () => {
+    context('Try to create product without value, name and amount', async () => {
         let bodyCreateProduct;
+
         beforeEach(async () => bodyCreateProduct = { 'product': {} });
+
         it('returns bad request error', async () => {
             const { body } = await request()
                 .post('/api/products')

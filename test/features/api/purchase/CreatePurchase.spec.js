@@ -239,7 +239,7 @@ describe('API :: POST /api/purchase', () => {
         });
 
 
-        it('returns bad request - Insuggicient Funds', async () => {
+        it('returns bad request - Insufficient Funds', async () => {
             const { body } = await request()
                 .post('/api/purchase')
                 .set('Authorization', 'Bearer ' + token)
