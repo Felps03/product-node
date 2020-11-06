@@ -28,7 +28,15 @@ module.exports = ({ container }) => {
          *            items:
          *              $ref: "#/definitions/InstallmentsReturned"
          *        "400":
-         *          description: "Bad Request"          
+         *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest"
+         *        "401":
+         *          description: "Unauthorized" 
+         *          schema:
+         *            $ref: "#/definitions/BadRequestUnauthorized"
+         *      security:
+         *        - Bearer: []         
          */
         {
             method: 'post',

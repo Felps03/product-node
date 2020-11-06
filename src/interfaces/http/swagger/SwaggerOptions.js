@@ -8,6 +8,13 @@ module.exports = ({ config }) => {
                 description: 'This is the "Product-Node" API reference. The API allows users to save products in stock and sell them.'
             },
             basePath: '/api',
+            securityDefinitions: {
+                Bearer: {
+                    type: 'apiKey',
+                    name: 'Authorization',
+                    in: 'header'
+                }
+            },
             definitions: {
                 Installments:
                 {
@@ -40,7 +47,7 @@ module.exports = ({ config }) => {
                         hasPrevPage: { type: 'boolean', example: false },
                         hasNextPage: { type: 'boolean', example: true },
                         prevPage: { type: ['boolean', 'null'], example: null },
-                        nextPage:  { type: ['boolean', 'null'], example: true }
+                        nextPage: { type: ['boolean', 'null'], example: true }
                     }
                 },
                 FullProduct:
@@ -81,6 +88,44 @@ module.exports = ({ config }) => {
                         amount: { type: 'integer', example: 280 }
                     }
                 },
+                UserAuthenticate:
+                {
+                    type: 'object',
+                    properties:
+                    {
+                        email: { type: 'string', example: 'Linus.Torvalds@linux.com' },
+                        password: { type: 'string', example: 'SomeStrongPassword' }
+                    }
+                },
+                UserAuthenticateResponse:
+                {
+                    type: 'object',
+                    properties:
+                    {
+                        name: { type: 'string', example: 'Linus.Torvalds' },
+                        token: { type: 'string', example: 'iyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjA0NTkxOTYxLCJleHAiOjE2MDQ2NzgzNjF9.8X9gkLGdlLRgq0kzzeZr9gPv3oZ5WCAMhmsu__HDTpg' }
+                    }
+                },
+                UserRegister:
+                {
+                    type: 'object',
+                    properties:
+                    {
+                        name: { type: 'string', example: 'Linus Torvalds' },
+                        email: { type: 'string', example: 'Linus.Torvalds@linux.com' },
+                        password: { type: 'string', example: 'SomeStrongPassword' }
+                    }
+                },
+                UserRegisterResponse:
+                {
+                    type: 'object',
+                    properties:
+                    {
+                        id: { type: 'number', example: 1 },
+                        name: { type: 'string', example: 'Linus Torvalds' },
+                        token: { type: 'string', example: 'iyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjA0NTkxOTYxLCJleHAiOjE2MDQ2NzgzNjF9.8X9gkLGdlLRgq0kzzeZr9gPv3oZ5WCAMhmsu__HDTpg' }
+                    }
+                },
                 ProductResponse:
                 {
                     type: 'object',
@@ -99,6 +144,28 @@ module.exports = ({ config }) => {
                     {
                         product: { type: 'integer', example: 1 },
                         paymentCondition: { '$ref': '#/definitions/Installments' }
+                    }
+                },
+                BadRequestUnauthorized:
+                {
+                    type: 'object',
+                    properties:
+                    {
+                        message: { type: 'string', example: 'Unauthorized' },
+                        status_code: { type: 'integer', example: 401 },
+                        error_code: { type: 'integer', example: 401 },
+                        details: { type: 'string', example: 'No token provided' }
+                    }
+                }, 
+                BadRequest:
+                {
+                    type: 'object',
+                    properties:
+                    {
+                        message: { type: 'string', example: 'Bad Request' },
+                        status_code: { type: 'integer', example: 400 },
+                        error_code: { type: 'integer', example: 400 },
+                        details: { type: 'string', example: 'Message about the error' }
                     }
                 }
             }

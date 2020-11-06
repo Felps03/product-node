@@ -28,6 +28,14 @@ module.exports = ({ container }) => {
          *            $ref: "#/definitions/ProductResponse"
          *        "400":
          *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest"
+         *        "401":
+         *          description: "Unauthorized"
+         *          schema:
+         *            $ref: "#/definitions/BadRequestUnauthorized"
+         *      security:
+         *       - Bearer: []
          *    get:
          *      tags:
          *      - "product"
@@ -49,7 +57,9 @@ module.exports = ({ container }) => {
          *            $ref: "#/definitions/FullResponse"
          *      
          *        "400":
-         *          description: "Bad Request" 
+         *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest"
          */   
         
         /**
@@ -76,7 +86,9 @@ module.exports = ({ container }) => {
          *            items:
          *              $ref: "#/definitions/FullProduct"
          *        "400":
-         *          description: "Bad Request" 
+         *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest" 
          * 
          */
 
@@ -109,7 +121,9 @@ module.exports = ({ container }) => {
          *          schema:
          *            $ref: "#/definitions/FullResponse"
          *        "400":
-         *          description: "Invalid status value"
+         *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest"
          */
         
         {

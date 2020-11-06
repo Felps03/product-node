@@ -5,10 +5,10 @@ module.exports = ({ container }) => {
         /**
          * @swagger
          * 
-         *  /purchase:
+         *  /register:
          *    post:
          *      tags:
-         *      - "purchase"
+         *      - "register"
          *      summary: "Register a user"
          *      description: "This route should be use to register a new user"
          *      produces:
@@ -16,19 +16,21 @@ module.exports = ({ container }) => {
          *      parameters:
          *      - name: "body"
          *        in: "body"
-         *        description: "Purchase object"
+         *        description: "Register User"
          *        required: true
          *        schema: 
-         *          $ref: "#/definitions/Product"
+         *          $ref: "#/definitions/UserRegister"
          *      responses:
-         *        "200":
-         *          description: "OK"
+         *        "201":
+         *          description: "Created"
          *          schema:
          *            type: "array"
          *            items:
-         *              $ref: "#/definitions/InstallmentsReturned"
+         *              $ref: "#/definitions/UserRegisterResponse"
          *        "400":
-         *          description: "Bad Request"          
+         *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest"          
          */
         {
             method: 'post',

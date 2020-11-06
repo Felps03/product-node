@@ -5,10 +5,10 @@ module.exports = ({ container }) => {
         /**
          * @swagger
          * 
-         *  /purchase:
+         *  /authenticate:
          *    post:
          *      tags:
-         *      - "purchase"
+         *      - "authenticate"
          *      summary: "Authenticate a user"
          *      description: "This route should be use to authenticate a new user and receive a token"
          *      produces:
@@ -16,19 +16,21 @@ module.exports = ({ container }) => {
          *      parameters:
          *      - name: "body"
          *        in: "body"
-         *        description: "Purchase object"
+         *        description: "Authenticate User"
          *        required: true
          *        schema: 
-         *          $ref: "#/definitions/Product"
+         *          $ref: "#/definitions/UserAuthenticate"
          *      responses:
          *        "200":
          *          description: "OK"
          *          schema:
          *            type: "array"
          *            items:
-         *              $ref: "#/definitions/InstallmentsReturned"
+         *              $ref: "#/definitions/UserAuthenticateResponse"
          *        "400":
-         *          description: "Bad Request"          
+         *          description: "Bad Request"
+         *          schema:
+         *            $ref: "#/definitions/BadRequest"          
          */
         {
             method: 'post',
