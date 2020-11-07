@@ -14,7 +14,7 @@ class Server {
     start() {
         return new Promise(resolve => {
             const server = http.createServer(this.express)
-                .listen(this.config.web.port, () => {
+                .listen(process.env.PORT||this.config.web.port, () => {
                     const { port } = server.address();
                     this.logger.info(`[p ${process.pid}] Listening at port ${port}`);
                     resolve();
