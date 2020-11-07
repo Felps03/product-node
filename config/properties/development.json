@@ -1,6 +1,7 @@
 {
     "serviceName": "product-node",
     "db": {
+        "external":"mongodb+srv://marcio:NW2j8F40VvCOm5yW@cluster0.yjea3.mongodb.net/devRadar?retryWrites=true&w=majority",
         "username": "admin",
         "password": "admin",
         "database": "product-node",

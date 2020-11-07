@@ -17,13 +17,13 @@ class ProviderConnection {
     }
 
     _getMongoURL(configDB) {
-        const { username, password, options, servers, dialect, database } = configDB;
+        const { username, password, options, servers, dialect, database, external } = configDB;
         const userPass = username && password ? `${encodeURIComponent(username)}:${encodeURIComponent(password)}@` : null;
         const url = servers.reduce((prev, cur) => prev + cur + ',', `${dialect}://${userPass}`);
         const urlParsed = `${url.substr(0, url.length - 1)}/${database}`;
         const authSource = `?authSource=${options.authSource}`;
         const replicaSet = options.replicaSet ? '&replicaSet=' + options.replicaSet : '';
-        return urlParsed + authSource + replicaSet;
+        return external?external:(urlParsed + authSource + replicaSet);
     }
 
     _getConnOptions(config) {

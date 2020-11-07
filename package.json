@@ -4,9 +4,11 @@
     "description": "Products",
     "main": "index.js",
     "engines": {
-        "node": "f>=10.13.x <11.0.0"
+        "node": "12.18.x", 
+        "npm": "6.14.6"
     },
     "scripts": {
+        "start": "cross-env NODE_PATH=. NODE_ENV=development node index.js",
         "audit": "npm audit --registry=https://registry.npmjs.org/",
         "audit:fix": "npm audit fix --registry=https://registry.npmjs.org/",
         "dev": "cross-env NODE_PATH=. NODE_ENV=development nodemon",
