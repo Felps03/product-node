@@ -1,7 +1,7 @@
 {
     "serviceName": "product-node",
     "db": {
-        "external":"mongodb+srv://marcio:NW2j8F40VvCOm5yW@cluster0.yjea3.mongodb.net/devRadar?retryWrites=true&w=majority",
+        "external":"",
         "username": "admin",
         "password": "admin",
         "database": "product-node",
@@ -39,9 +39,9 @@
         "domain": "https://localhost:4000/"
     },
     "stackError": {
-        "isVisible": true
+        "isVisible": false
     },
     "auth":{
-        "secret": "2cl3k4m5%L&l52m"
+        "secret": ""
     }
 }
