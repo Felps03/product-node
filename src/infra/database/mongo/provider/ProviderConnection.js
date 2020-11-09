@@ -23,7 +23,7 @@ class ProviderConnection {
         const urlParsed = `${url.substr(0, url.length - 1)}/${database}`;
         const authSource = `?authSource=${options.authSource}`;
         const replicaSet = options.replicaSet ? '&replicaSet=' + options.replicaSet : '';
-        return external?external:(urlParsed + authSource + replicaSet);
+        return process.env.DATABASE_URL || (urlParsed + authSource + replicaSet);
     }
 
     _getConnOptions(config) {
