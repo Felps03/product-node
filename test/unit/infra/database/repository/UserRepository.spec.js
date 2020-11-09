@@ -1,9 +1,10 @@
 const { expect, spy } = require('chai');
 const UserRepository = require('src/infra/database/repository/UserRepository');
+const { generate } = require('../../../../../../../../AppData/Local/Microsoft/TypeScript/4.0/node_modules/rxjs/index');
 
 
 describe('Infra :: Database :: Repository :: UserRepository', () => {
-    let userRequested, userFromDatabase, userRepository, userModel;
+    let userRequested, userFromDatabase, userRepository, userModel, generateHash;
     
     context('When user is created with success', () => {
 
@@ -13,13 +14,17 @@ describe('Infra :: Database :: Repository :: UserRepository', () => {
                 _id: 'someRandomMongodbId',
                 name: 'Linus',
                 email: 'Linus.Torvalds@linux.com',
-                password: 'somehashedpassword',
+                password: 'someHashedPassword',
                 createAt: '2020-11-04T19:26:23.728Z',
                 updateAt: '2020-11-04T19:26:23.729Z',
             };
 
             userModel = {
                 create: () => Promise.resolve(userFromDatabase)
+            };
+
+            generateHash = {
+                generate: () => Promise.resolve('someHashedPassword')
             };
 
             userRequested = {
@@ -29,13 +34,15 @@ describe('Infra :: Database :: Repository :: UserRepository', () => {
             };
 
             spy.on(userModel, 'create');
-            userRepository = new UserRepository({ userModel });
+            spy.on(generateHash, 'generate');
+            userRepository = new UserRepository({ userModel, generateHash });
         });
 
         it(' returns full user data from database', async () => {
 
             const response = await userRepository.create(userRequested);
             expect(userModel.create).to.be.called.once.with.exactly(userRequested);
+            expect(generateHash.generate).to.be.called.once.with.exactly('somePasswordNotHashed');
             expect(response).to.deep.equal(userFromDatabase);
         });
     });
@@ -49,7 +56,7 @@ describe('Infra :: Database :: Repository :: UserRepository', () => {
                 _id: 'someRandomMongodbId',
                 name: 'Linus',
                 email: 'Linus.Torvalds@linux.com',
-                password: 'somehashedpassword',
+                password: 'someHashedPassword',
                 createAt: '2020-11-04T19:26:23.728Z',
                 updateAt: '2020-11-04T19:26:23.729Z',
             };
@@ -86,12 +93,18 @@ describe('Infra :: Database :: Repository :: UserRepository', () => {
                 password: 'somePasswordNotHashed'
             };
 
+            generateHash = {
+                generate: () => Promise.resolve('someHashedPassword')
+            };
+
             userModel = {
                 create: () => Promise.reject(new Error('test'))
             };
 
-            userRepository = new UserRepository({ userModel });
+            userRepository = new UserRepository({ userModel, generateHash });
             spy.on(userModel, 'create');
+            spy.on(generateHash, 'generate');
+
         });
 
         it('throws an error', done => {
@@ -103,6 +116,7 @@ describe('Infra :: Database :: Repository :: UserRepository', () => {
                     expect(error).to.be.exist();
                     expect(error.message).to.be.eql('test');
                     expect(userModel.create).to.be.called.once();
+                    expect(generateHash.generate).to.be.called.once();
                     done();
                 });
         });

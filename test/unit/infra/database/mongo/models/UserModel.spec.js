@@ -56,6 +56,7 @@ describe('Infra :: Database :: Mongo :: Models :: UserModel', () => {
                 providerConnection: ProviderConnection,
                 config
             });
+
             data = {
                 name: 'Linus',
                 email: 'Linus.Torvalds@linux.com',
