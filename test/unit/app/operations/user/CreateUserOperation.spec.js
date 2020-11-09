@@ -62,6 +62,45 @@ describe('App :: Operations :: User :: CreateUserOperation', () => {
             });
         });
 
+        context('when occurs error email already used', () => {
+
+            let userRepository, createUserOperation, logger, exception;
+
+            before(() => {
+                userRepository = {
+                    create: () => Promise.reject({code: 11000})
+                };
+
+                logger = {
+                    error: () => ({ erro: 'Error was logged' })
+                };
+
+                exception = {
+                    badRequest: () => { throw new Error('E-mail already used'); }
+                }
+
+                createUserOperation = new CreateUserOperation({ userRepository, logger, exception });
+                
+                spy.on(userRepository, 'create');
+                spy.on(logger, 'error');
+                spy.on(exception, 'badRequest');
+            });
+
+            it('throws error', done => {
+                createUserOperation
+                    .execute({})
+                    .then(done => done('Must be an error'))
+                    .catch(error => {
+
+                        expect(logger.error).to.have.been.called.once();
+                        expect(exception.badRequest).to.have.been.called.once.with.exactly('E-mail already used');
+                        expect(error.message).to.be.eql('E-mail already used');
+                        expect(error).to.be.exist();
+                        done();
+                    });
+            });
+        });
+
         context('when occurs error', () => {
 
             let userRepository, createUserOperation, logger;
