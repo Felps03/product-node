@@ -73,7 +73,7 @@ describe('API :: POST /api/purchase', () => {
             purchase = {
                 'product': body.id,
                 'paymentCondition': {
-                    'inputValue': 170,
+                    'inputValue': 196.77,
                     'numberOfInstallments': 7
                 }
             };
@@ -182,7 +182,7 @@ describe('API :: POST /api/purchase', () => {
             purchase = {
                 'product': body.id,
                 'paymentCondition': {
-                    'inputValue': 170,
+                    'inputValue': 196.77,
                     'numberOfInstallments': 7
                 }
             };
@@ -249,7 +249,7 @@ describe('API :: POST /api/purchase', () => {
             expect(body.message).to.be.eql('Bad Request');
 
             const message = body.details.shift();
-            expect(message).to.be.eql('Insufficient funds');
+            expect(message).to.be.eql('Insuffient Funds - Total price for 1 installments is 170');
 
         });
     });
